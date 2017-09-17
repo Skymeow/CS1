@@ -5,8 +5,6 @@ feel free to build a full command line interface through which '''
 
 import random
 
-
-
 bank_account = 1000
 bet_amount = 0
 bet_color = None
@@ -23,16 +21,28 @@ def take_bet(color, number, amount):
     return [bet_color, bet_number, bet_amount]
 def roll_ball():
     '''returns a random number between 0 and 37'''
-    x = random.randint(0, 37)
+    # and also check for which color group the number is in
+    x = random.randint(0, 38)
+    if x in green:
+        return [x,"green"]
+    elif x in red:
+        return [x,"red"]
+    else:
+        return [x,"black"]
     return x
 
 roll_ball()
 
-def check_results(rolled_ball, player_bet):
+def check_results(rolled_ball, rolled_color, player_bet):
     '''Compares bet_color to color rolled.  Compares
     bet_number to number_rolled.'''
     print("the num randomly rolled", int(rolled_ball))
+
     if rolled_ball == player_bet[1]:
+        won_number = "check number"
+        payout(won_number, player_bet)
+    elif rolled_color == player_bet[0]:
+        won_number = "check color"
         payout(won_number, player_bet)
     else:
         print("you failed")
@@ -41,9 +51,10 @@ def check_results(rolled_ball, player_bet):
     pass
 
 def payout(won_number, player_bet):
-    if won_number:
+    if won_number == "check number":
         print("Congrats, you won ", str(bank_account + player_bet[2]))
-
+    elif won_number == "check color":
+        print("Congrats, you won a little ", str(bank_account + 0.5 * player_bet[2]))
     else:
         print("Sorry, you lose ", str(bank_account - player_bet[2]))
     '''returns total amount won or lost by user based on results of roll. '''
@@ -58,10 +69,15 @@ def play_game():
     Determine if the user won or lost.
     Pay or deduct money from the user accordingly.
     """
-    color = input("choose color\t")
+    # color = input("choose color\t")
     number = input("choose a number from 1-37\t")
-
-    check_results(roll_ball(), take_bet(color, number, int(input("how much do you wanna bet?\t"))))
+    if number in green:
+        color = "green"
+    elif number in red:
+        color = "red"
+    else:
+        color = "black"
+    check_results(roll_ball()[0], roll_ball()[1], take_bet(color, number, int(input("how much do you wanna bet?\t"))))
     pass
 play_game()
 
