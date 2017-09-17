@@ -69,10 +69,13 @@ def play_game():
     Determine if the user won or lost.
     Pay or deduct money from the user accordingly.
     """
-    # color = input("choose color\t")
-    number = input("choose a number from 1-37\t")
+    # user pick color
+    color = input("choose color\t")
+
+    number = input("choose a number from 2-36\t")
     if number in green:
         color = "green"
+        play_game()
     elif number in red:
         color = "red"
     else:
