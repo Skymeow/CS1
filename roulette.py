@@ -1,19 +1,67 @@
-# import antigravity (run in terminal)
-# let them pick one color(black/red)
-take bet,
+#!/usr/bin/env python
+'''Build a working roulette game.  At minimum, this script should
+Complete one round of roulette - but if you're up to the challenge,
+feel free to build a full command line interface through which '''
+
 import random
-# random.seed(5), seed() means where to start
-# from random import randint as r (use randint as alias)
-# x = random.randint(1,100), it's actually psedorandom , reproducable randomness
+
+
+
 bank_account = 1000
 bet_amount = 0
 bet_color = None
 bet_number = None
 
-green = [0,37]
-red = [1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36]
-black = [2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,31,33,35]
-# function should do one thing only, like 10-15 lines
-how do we generate true random things, satastic?
+green = [0, 37]
+red = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36]
+black = [2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35]
 
+def take_bet(color, number, amount):
+    bet_color = color
+    bet_number = number
+    bet_amount = amount
+    return [bet_color, bet_number, bet_amount]
+def roll_ball():
+    '''returns a random number between 0 and 37'''
+    x = random.randint(0, 37)
+    return x
+
+roll_ball()
+
+def check_results(rolled_ball, player_bet):
+    '''Compares bet_color to color rolled.  Compares
+    bet_number to number_rolled.'''
+    print("the num randomly rolled", int(rolled_ball))
+    if rolled_ball == player_bet[1]:
+        payout(won_number, player_bet)
+    else:
+        print("you failed")
+        won_number = None
+        payout(won_number, player_bet)
+    pass
+
+def payout(won_number, player_bet):
+    if won_number:
+        print("Congrats, you won ", str(bank_account + player_bet[2]))
+
+    else:
+        print("Sorry, you lose ", str(bank_account - player_bet[2]))
+    '''returns total amount won or lost by user based on results of roll. '''
+    pass
+
+def play_game():
+    """This is the main function for the game.
+    When this function is called, one full iteration of roulette,
+    including:
+    Take the user's bet.
+    Roll the ball.
+    Determine if the user won or lost.
+    Pay or deduct money from the user accordingly.
+    """
+    color = input("choose color\t")
+    number = input("choose a number from 1-37\t")
+
+    check_results(roll_ball(), take_bet(color, number, int(input("how much do you wanna bet?\t"))))
+    pass
+play_game()
 
