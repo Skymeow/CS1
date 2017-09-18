@@ -4,6 +4,10 @@ Complete one round of roulette - but if you're up to the challenge,
 feel free to build a full command line interface through which '''
 
 import random
+from asciimatics.effects import Cycle, Stars
+from asciimatics.renderers import FigletText
+from asciimatics.scene import Scene
+from asciimatics.screen import Screen
 
 bank_account = 1000
 bet_amount = 0
@@ -69,18 +73,21 @@ def play_game():
     Determine if the user won or lost.
     Pay or deduct money from the user accordingly.
     """
-    # user pick color
-    color = input("choose color\t")
-
-    number = input("choose a number from 2-36\t")
-    if number in green:
-        color = "green"
-        play_game()
-    elif number in red:
-        color = "red"
-    else:
-        color = "black"
+    ask_mood = input("Do you wanna pick number or color?")
+    if ask_mood = "color":
+        # user pick color
+        color = input("choose color\t")
+    elif ask_mood = "number":
+        number = input("choose a number from 2-36\t")
+            if number in green:
+                color = "green"
+                play_game()
+            elif number in red:
+                color = "red"
+            else:
+                color = "black"
     check_results(roll_ball()[0], roll_ball()[1], take_bet(color, number, int(input("how much do you wanna bet?\t"))))
     pass
 play_game()
+
 
