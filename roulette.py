@@ -86,6 +86,7 @@ def play_game():
         else:
             number = None
         check_results(roll_ball()[0], roll_ball()[1], take_bet(color, number, int(input("how much do you wanna bet?\t"))))
+        continue_game()
     elif ask_mood == "number":
         number = input("choose a number from 2-36\t")
         if number in green:
@@ -96,7 +97,15 @@ def play_game():
         else:
             color = "black"
         check_results(roll_ball()[0], roll_ball()[1], take_bet(color, number, int(input("how much do you wanna bet?\t"))))
+        continue_game()
     pass
+
+def continue_game():
+    play_again = input("wanna play again? (y/n)")
+    if play_again == "y":
+        play_game()
+    else:
+        return
 play_game()
 
 
