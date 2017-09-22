@@ -35,7 +35,7 @@ def getGuessedWord(secretWord, lettersGuessed):
     in the word that the user has not yet guessed, shown an _ (underscore) instead.
     '''
     # FILL IN YOUR CODE HERE...
-    print(lettersGuessed)
+    print("this is what you have guessed so far", lettersGuessed)
     msg = ""
     for i in secretWord:
       if i in lettersGuessed:
@@ -50,17 +50,17 @@ def getGuessedWord(secretWord, lettersGuessed):
 
 
 
-def getAvailableLetters(lettersGuessed):
-    '''
-    lettersGuessed: list of letters that have been guessed so far
-    returns: string, comprised of letters that represents what letters have not
-      yet been guessed.
-    '''
-    for i in range(0, len(lettersGuessed)):
-     if lettersGuessed[i] in secretWord:
-      return secretWord.replace("lettersGuessed[i]", "")
-     else:
-      return ""
+# def getAvailableLetters(lettersGuessed):
+#     '''
+#     lettersGuessed: list of letters that have been guessed so far
+#     returns: string, comprised of letters that represents what letters have not
+#       yet been guessed.
+#     '''
+#     for i in range(0, len(lettersGuessed)):
+#      if lettersGuessed[i] in secretWord:
+#       return secretWord.replace("lettersGuessed[i]", "")
+#      else:
+#       return ""
 
 
 def hangman(secretWord):
@@ -83,18 +83,23 @@ def hangman(secretWord):
     '''
     guessLeft = len(secretWord) + 2
     print("start the game, the number of secretWord letters is", len(secretWord))
-    print("secret word is ", secretWord)
+    # print("secret word is ", secretWord)
     lettersGuessed = []
     while guessLeft > 0:
       guess = input("guess one letter")
       lettersGuessed.append(guess)
-      getAvailableLetters(lettersGuessed)
       guessLeft -= 1
-      print("all guess try is here", getGuessedWord(secretWord, lettersGuessed))
-      print('&&&&&&&', guessLeft)
-      if isWordGuessed(secretWord, lettersGuessed) == True:
-        print("Congrats, you won!")
-        break
+      if not guess in secretWord:
+        print("sorry wrong guess")
+        print("all guess try is here", getGuessedWord(secretWord, lettersGuessed))
+        print('You can still guess ', guessLeft)
+      else:
+        print("yay you are rignt")
+        print("all guess try is here", getGuessedWord(secretWord, lettersGuessed))
+        print('You can still guess ', guessLeft)
+        if isWordGuessed(secretWord, lettersGuessed) == True:
+          print("Congrats, you won!")
+          break
     else:
       return print("sorry your are out of guess, the secret word is ", secretWord)
 
