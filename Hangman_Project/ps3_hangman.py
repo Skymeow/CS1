@@ -1,5 +1,7 @@
 import random
-
+#Reminder:
+# handle edge cases!
+#use linter!
 def loadWord():
    f = open('hangman_words.txt', 'r')
    wordsList = f.readlines()
@@ -16,11 +18,10 @@ def isWordGuessed(secretWord, lettersGuessed):
     returns: boolean, True only if all the letters of secretWord are in lettersGuessed;
       False otherwise
     '''
-    for i in range(0, len(secretWord)):
-      if not secretWord[i] in lettersGuessed:
+    for i in secretWord:
+      if not i in lettersGuessed:
         return False
-    else:
-      return True
+    return True
 
 
 
@@ -86,7 +87,7 @@ def hangman(secretWord):
     # print("secret word is ", secretWord)
     lettersGuessed = []
     while guessLeft > 0:
-      guess = input("guess one letter")
+      guess = input("guess one letter: ").lower()
       lettersGuessed.append(guess)
       guessLeft -= 1
       if not guess in secretWord:

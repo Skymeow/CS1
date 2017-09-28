@@ -23,7 +23,7 @@ def scrape_one(url):
     r = requests.get(url)
     data = r.text
     soup = BeautifulSoup(data, "lxml")
-    word_scrapped = cleaned_text()
+    word_scrapped = cleaned_text(soup)
     return word_scrapped
 
 def tag_visible(element):
@@ -33,10 +33,11 @@ def tag_visible(element):
         return False
     return True
 
-def cleaned_text():
-    r = requests.get("https://www.makeschool.com/")
-    data = r.text
-    soup = BeautifulSoup(data, "lxml")
+def cleaned_text(soup):
+    # r = requests.get("https://www.makeschool.com/")
+    # data = r.text
+    # soup = BeautifulSoup(data, "lxml")
+
     test = soup.find_all(text = True)
     visible = filter(tag_visible, test)
     text =  u"".join(t.strip() for t in visible)
@@ -49,7 +50,7 @@ def cleaned_text():
     return word
 
 def load_word():
-    secret = random.choice(cleaned_text())
+    secret = random.choice(cleaned_text(soup))
     return secret.lower()
 
 
