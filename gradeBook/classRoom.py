@@ -3,25 +3,30 @@ import pdb
 class Classroom():
 
     def __init__(self, className, date):
+        self.next_student_ID = 0
         self. className = className
         self.date = date
         self.roster = {}
 
 
-    # create a student object to roster
+    # create a student object to roster +
     def create_student(self, student_name):
         # student_name = str(input("what's the name of the new student? "))
         # student_name = "mike"
-        new_student = Student(student_name)
+        new_student = Student(student_name, self.next_student_ID)
+        self.next_student_ID += 1
         self.roster[new_student.student_ID] = new_student
-        return self.roster
+        # return self.roster
 
 
-    def remove_student(self):
-        # ask the teacher to isnput the id of student she wants to delete
-        id = int(input("what's the Id of the student you wanna delete? "))
-        self.roster.pop(id, None)
-        return(self.roster)
+    def remove_student(self, student_name):
+        key_to_be_deleted = None
+        for k,v in self.roster.items():
+            if v.studentName == student_name:
+                key_to_be_deleted = k
+        self.roster.pop(key_to_be_deleted, None)
+        print(self.roster)
+
     # create a list assignments
     def add_assignments():
         assignment = input("what's the assignment? ")
@@ -45,8 +50,11 @@ class Classroom():
 
 
 classroom1 = Classroom("cs1","09/10")
-added_roster = classroom1.create_student("sky")
-
+classroom1.create_student("sky")
+classroom1.create_student("sky2")
+# print(classroom1.roster)
+classroom1.remove_student("sky")
+print(classroom1.roster)
 # print(classroom1.create_student("yo").student_ID)
 # print(classroom1.create_student())
 

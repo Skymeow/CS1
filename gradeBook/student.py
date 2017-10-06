@@ -1,10 +1,10 @@
 import math
 class Student():
-    id = 0
-    def __init__(self, studentName):
+    # id = 0
+    def __init__(self, studentName, student_ID):
         self.studentName = studentName
-        Student.id += 1
-        self.student_ID = id
+        # Student.id += 1
+        self.student_ID = student_ID
         self.grade = None
         self.grades = {}
 
