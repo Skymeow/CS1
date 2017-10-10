@@ -1,0 +1,4 @@
+{
+  "test.py::test_get_average": true,
+  "test.py::test_setUp_student": true
+}
