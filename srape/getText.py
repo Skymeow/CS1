@@ -1,5 +1,7 @@
 # with open('sss.txt', r) as f
 # give it write permission
+# def clean_all_data(raw_text):
+#     cleaned_data =
 # with open('sales_data.txt','r') as f:
     #read all at once
     # text = f.read()

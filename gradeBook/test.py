@@ -66,15 +66,15 @@ def test_grade_manystudents_assignment():
 
 
 
-def test_get_average():
-    classroom = setup_test()
-    roster = classroom.create_student("sky")
-    roster = classroom.create_student("sky2")
-    classroom.add_assignment("firstClass")
-    classroom.grade_student_assignment("firstClass", "sky")
-    classroom.grade_student_assignment("firstClass", "sky2")
-    classroom.get_average("firstClass")
-    assert average == 90
+# def test_get_average():
+#     classroom = setup_test()
+#     roster = classroom.create_student("sky")
+#     roster = classroom.create_student("sky2")
+#     classroom.add_assignment("firstClass")
+#     classroom.grade_student_assignment("firstClass", "sky")
+#     classroom.grade_student_assignment("firstClass", "sky2")
+#     classroom.get_average("firstClass")
+#     assert average == 90
 
 
 
