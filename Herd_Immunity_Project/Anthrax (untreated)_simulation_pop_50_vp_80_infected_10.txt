@@ -1,0 +1,47 @@
+50	 80	 Anthrax (untreated)	 0.2	 6.5
+#6 survived infection
+#17 survived infection
+#2 infects #43
+#2 didn't infect #43 because already sick
+#2 infects #38
+#2 didn't infect #38 because already sick
+#14 survived infection
+#17 survived infection
+#41 survived infection
+#5 infects #16
+#5 didn't infect #16 because already sick
+#5 infects #34
+#5 didn't infect #34 because already sick
+#25 survived infection
+#7 infects #48
+#7 didn't infect #48 because already sick
+#7 infects #40
+#7 didn't infect #40 because already sick
+#40 survived infection
+#16 survived infection
+#9 infects #46
+#9 didn't infect #46 because already sick
+#21 survived infection
+#32 survived infection
+#12 survived infection
+#20 survived infection
+#5 survived infection
+#42 survived infection
+#46 survived infection
+#1 infects #28
+#1 didn't infect #28 because already sick
+#28 survived infection
+#0 died from infection
+#32 survived infection
+#36 survived infection
+#7 infects #30
+#7 didn't infect #30 because already sick
+#27 survived infection
+#25 survived infection
+#27 survived infection
+#41 survived infection
+#25 survived infection
+#46 survived infection
+#37 survived infection
+#32 survived infection
+Time step ^2 ended, beginning ^^3...

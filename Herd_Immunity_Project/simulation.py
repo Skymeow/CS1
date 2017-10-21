@@ -91,7 +91,6 @@ class Simulation(object):
         # self.newly_infected.append(self.next_person_id
         self.newly_infected = []
         self._create_population(initial_infected)
-        print("yo newly_infected in init", self.newly_infected)
 
 
     def _create_population(self, initial_infected):
@@ -109,16 +108,16 @@ class Simulation(object):
                 new_person = Person(self.next_person_id, False, True, disease_object)
                 infected_count += 1
                 self.population.append(new_person)
-                print("yo infected boiiii", new_person._id)
             else:
                 # Every time a new person will be created If this random number(0,1) is smaller than vacc_percentage, this person
                 # should be created as a vaccinated person.
                 rand_num = random.uniform(0, 1)
                 disease_object = [self.mortality_rate, self.basic_repro_num]
-                if rand_num < self.vacc_percentage:
+                if rand_num < self.vacc_percentage*0.01:
                     rest_person = Person(self.next_person_id, True, True, None)
                     self.population.append(rest_person)
                 else:
+                    # print("inside create_ population set isvaccinated to false")
                     rest_person = Person(self.next_person_id, False, True, None)
                     self.population.append(rest_person)
             self.next_person_id += 1
@@ -182,6 +181,7 @@ class Simulation(object):
         # round of this simulation.  At the end of each iteration of this loop, remember
         # to rebind should_continue to another call of self._simulation_should_continue()
         print('The simulation has ended after {} turns.'.format(time_step_counter))
+        self.logger.log_time_step(time_step_counter)
 
     def time_step(self):
             #        - Repeat for 100 total interactions:
@@ -196,11 +196,9 @@ class Simulation(object):
                 if person.infection is not None and person.is_alive:
                     interactions = 0
                     while interactions < 10:
-                        # pdb.set_trace()
                         rand_index = random.randint(0,len(self.population)-1)
                         random_person = self.population[rand_index]
                         if random_person.is_alive:
-                                print(random_person.infection)
                                 self.interaction(person, random_person)
                                 interactions += 1
                                 self._infect_newly_infected()
@@ -209,28 +207,28 @@ class Simulation(object):
                         random_person.is_alive = False
                         # random_person.is_vaccinated = False
                         # random_person.infection == None
-                        # self.logger.log_infection_survive(random_person, True)
+                        self.logger.log_infection_survival(random_person, True)
                     else:
-                        # print("went into the round of set infected")
                         random_person.is_vaccinated = True
                         random_person.infection = None
-                        # self.logger.log_infection_survive(random_person, False)
+                        self.logger.log_infection_survival(random_person, False)
 
     def interaction(self, person, random_person):
         did_infect = False
         # random_person is healthy, but unvaccinated:
         # err: only infected , unvaccinated
         #err2: not infected, vaccinated
+        # no such case of is_vaccinated:False, infection:None
         print(random_person.is_vaccinated, random_person.infection)
         if random_person.is_vaccinated == False and random_person.infection == None:
             print("should infect!")
             rand_num = random.uniform(0, 1)
-            if rand_num < self.basic_repro_num:
+            if rand_num < self.basic_repro_num*0.1:
                 self.newly_infected.append(random_person._id)
                 disease_object = [self.mortality_rate, self.basic_repro_num]
                 random_person.infection = disease_object
                 did_infect = True
-                self.logger.log_interaction(self, person, random_person, did_infect, random_person.is_vaccinated, random_person.infection)
+                self.logger.log_interaction(person, random_person, did_infect, random_person.is_vaccinated, random_person.infection)
 
             # generate a random number between 0 and 1.  If that number is smaller
             # than basic_repro_num, random_person's ID should be appended to
@@ -247,7 +245,7 @@ class Simulation(object):
         for person in self.population:
             if person._id in self.newly_infected:
                 person.infection == [self.mortality_rate, self.basic_repro_num]
-                print("yo infected", person._id)
+                # print("yo infected", person._id)
         self.newly_infected = []
         # For every person id in self.newly_infected:
         #   - Find the Person object in self.population that has this corresponding ID.
@@ -268,7 +266,7 @@ class Simulation(object):
     # else:
     #     initial_infected = 1
 def start():
-    simulation = Simulation(50, 98, 'Anthrax (untreated)', virus_list['Anthrax (untreated)'][0]*0.01, virus_list['Anthrax (untreated)'][1], 2)
+    simulation = Simulation(50, 80, 'Anthrax (untreated)', virus_list['Anthrax (untreated)'][0]*0.01, virus_list['Anthrax (untreated)'][1], 10)
     simulation.run(simulation.initial_infected)
 
 start()
