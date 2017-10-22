@@ -146,13 +146,16 @@ class Simulation(object):
 
         # now compare the deadpep, infectedpeep count to the whole population
         if dead_peep == len(population):
-            print("F! all dead!")
+            # print("F! all dead!")
+            self.logger.log_continue(0)
             return False
         elif infected_peep == 0:
-            print("oh no no infected peep left")
+            # print("oh no no infected peep left")
+            self.logger.log_continue(1)
             return False
         else:
-            print("yay we can continue")
+            # print("yay we can continue")
+            self.logger.log_continue(2)
             return True
 
     def run(self, initial_infected):
